@@ -13,6 +13,20 @@ import (
 
 var defaultStopTimeout = time.Second * 30
 
+type Endpoint struct {
+	handler EndpointFunc
+}
+
+type EndpointFunc func(w http.ResponseWriter, req *http.Request) error
+
+func (e Endpoint) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	if err := e.handler(w, req); err != nil {
+		logrus.WithError(err).Error("could not process request")
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("internal server error"))
+	}
+}
+
 type APIServer struct {
 	addr    string
 	storage *storage.Storage
