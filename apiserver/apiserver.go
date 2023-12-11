@@ -69,6 +69,8 @@ func (s *APIServer) router() http.Handler {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/", s.defaultRoute)
+	router.Methods("POST").Path("/items").Handler(Endpoint{s.createItem})
+	router.Methods("GET").Path("/items").Handler(Endpoint{s.listItems})
 	return router
 }
 
