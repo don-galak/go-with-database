@@ -9,8 +9,14 @@ Run with: `docker compose up`
 
 Update imports: `docker compose run --rm app go mod tidy`
 
+Create migration: `docker compose --profile tools run create-migration create_items`
+
 Run migration: `docker compose --profile tools run migrate`
 
-Create migration: `docker compose --profile tools run create-migration create_items`
+Access postgres: `docker compose exec db psql -U local-dev -d api`
+
+then, retrieve table: `\d ${tablename};`
+
+Exit postgres: `\q`
 
 link: [Develop a Go app with Docker Compose](https://firehydrant.com/blog/develop-a-go-app-with-docker-compose/)
