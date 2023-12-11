@@ -1,17 +1,20 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
 
 	"github.com/don-galak/go-with-database/apiserver"
+	"github.com/don-galak/go-with-database/storage"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
 )
 
 const (
-	apiServerAddrFlagName string = "addr"
+	apiServerAddrFlagName       string = "addr"
+	apiServerStorageDatabaseURL string = "database-url"
 )
 
 func main() {
@@ -36,6 +39,7 @@ func apiServerCmd() *cli.Command {
 		Usage: "starts the API server",
 		Flags: []cli.Flag{
 			&cli.StringFlag{Name: apiServerAddrFlagName, EnvVars: []string{"API_SERVER_ADDR"}},
+			&cli.StringFlag{Name: apiServerStorageDatabaseURL, EnvVars: []string{"DATABASE_URL"}},
 		},
 		Action: func(c *cli.Context) error {
 
@@ -48,8 +52,14 @@ func apiServerCmd() *cli.Command {
 				close(stopper)
 			}()
 
+			databaseURL := c.String(apiServerStorageDatabaseURL)
+			s, err := storage.NewStorage(databaseURL)
+			if err != nil {
+				return fmt.Errorf("could not initialize storage: %w", err)
+			}
+
 			addr := c.String(apiServerAddrFlagName)
-			server, err := apiserver.NewAPIServer(addr)
+			server, err := apiserver.NewAPIServer(addr, s)
 			if err != nil {
 				return err
 			}

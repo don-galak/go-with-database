@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/don-galak/go-with-database/storage"
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
 )
@@ -13,16 +14,18 @@ import (
 var defaultStopTimeout = time.Second * 30
 
 type APIServer struct {
-	addr string
+	addr    string
+	storage *storage.Storage
 }
 
-func NewAPIServer(addr string) (*APIServer, error) {
+func NewAPIServer(addr string, storage *storage.Storage) (*APIServer, error) {
 	if addr == "" {
 		return nil, errors.New("addr cannot be blank")
 	}
 
 	return &APIServer{
-		addr: addr,
+		addr:    addr,
+		storage: storage,
 	}, nil
 }
 
