@@ -7,6 +7,10 @@ steps
 
 Run with: `docker compose up`
 
-Run to update imports: `docker compose run --rm app go mod tidy`
+Update imports: `docker compose run --rm app go mod tidy`
+
+Run migration: `docker compose --profile tools run migrate`
+
+Create migration: `docker compose --profile tools run create-migration create_items`
 
 link: [Develop a Go app with Docker Compose](https://firehydrant.com/blog/develop-a-go-app-with-docker-compose/)
