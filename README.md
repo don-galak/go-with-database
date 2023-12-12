@@ -19,4 +19,8 @@ then, retrieve table: `\d ${tablename};`
 
 Exit postgres: `\q`
 
+Create item: `curl -F "name=${name}" http://localhost:3000/items`
+
+Retrieve items: `curl http://localhost:3000/items`
+
 link: [Develop a Go app with Docker Compose](https://firehydrant.com/blog/develop-a-go-app-with-docker-compose/)
