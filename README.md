@@ -23,4 +23,8 @@ Create item: `curl -F "name=${name}" http://localhost:3000/items`
 
 Retrieve items: `curl http://localhost:3000/items`
 
+Build: `docker build -t go-with-database`
+
+Run build: `docker run -e API_SERVER_ADDR=:3000 go-with-database`
+
 link: [Develop a Go app with Docker Compose](https://firehydrant.com/blog/develop-a-go-app-with-docker-compose/)
