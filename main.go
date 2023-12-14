@@ -39,7 +39,7 @@ func apiServerCmd() *cli.Command {
 		Usage: "starts the API server",
 		Flags: []cli.Flag{
 			&cli.StringFlag{Name: apiServerAddrFlagName, EnvVars: []string{"API_SERVER_ADDR"}},
-			&cli.StringFlag{Name: apiServerStorageDatabaseURL, EnvVars: []string{"DATABASE_URL"}},
+			&cli.StringFlag{Name: apiServerStorageDatabaseURL, EnvVars: []string{"POSTGRES_DB_URL"}},
 		},
 		Action: func(c *cli.Context) error {
 

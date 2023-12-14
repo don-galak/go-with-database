@@ -13,7 +13,7 @@ Create migration: `docker compose --profile tools run create-migration create_it
 
 Run migration: `docker compose --profile tools run migrate`
 
-Access postgres: `docker compose exec db psql -U local-dev -d api`
+Access postgres: `docker compose exec postgres psql -U local-dev -d api`
 
 then, retrieve table: `\d ${tablename};`
 
@@ -23,7 +23,7 @@ Create item: `curl -F "name=${name}" http://localhost:3000/items`
 
 Retrieve items: `curl http://localhost:3000/items`
 
-Build: `docker build -t go-with-database`
+Build: `docker build -t go-with-database .`
 
 Run build: `docker run -e API_SERVER_ADDR=:3000 go-with-database`
 

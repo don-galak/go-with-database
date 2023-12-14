@@ -9,12 +9,12 @@ services:
       - .:/opt/app/api
     environment:
       API_SERVER_ADDR: ":3000"
-      DATABASE_URL: postgres://local-dev@db/api?sslmode=disable
+      POSTGRES_DB_URL: postgres://local-dev@postgres/api?sslmode=disable
     ports: 
     - "3000:3000"
     links:
-    - db
-  db:
+    - postgres
+  postgres:
     image: postgres:13-alpine
     volumes:
       - data:/var/lib/postgresql/data
@@ -26,10 +26,10 @@ services:
   migrate: &basemigrate
     profiles: ["tools"]
     image: migrate/migrate
-    entrypoint: "migrate -database postgresql://local-dev@db/api?sslmode=disable -path /tmp/migrations"
+    entrypoint: "migrate -database postgresql://local-dev@postgres/api?sslmode=disable -path /tmp/migrations"
     command: up
     links:
-      - db
+      - postgres
     volumes:
       - ./migrations:/tmp/migrations
 
