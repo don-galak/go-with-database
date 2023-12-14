@@ -1,9 +1,11 @@
-steps
+## Necessary steps, execute in order:
 
 1. create Dockerfile, docker-compose.yml, main.go
 2. docker compose build
 3. docker compose run -rm app go mod init github.com/${user}/${project-name}
 4. docker compose run --rm app air init
+
+## General commands
 
 Run with: `docker compose up`
 
@@ -26,5 +28,7 @@ Retrieve items: `curl http://localhost:3000/items`
 Build: `docker build -t go-with-database .`
 
 Run build: `docker run -e API_SERVER_ADDR=:3000 go-with-database`
+
+## References
 
 link: [Develop a Go app with Docker Compose](https://firehydrant.com/blog/develop-a-go-app-with-docker-compose/)
