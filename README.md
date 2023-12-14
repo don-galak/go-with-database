@@ -2,7 +2,7 @@
 
 1. create Dockerfile, docker-compose.yml, main.go
 2. docker compose build
-3. docker compose run -rm app go mod init github.com/${user}/${project-name}
+3. docker compose run -rm app go mod init `github.com/${username}/${project-name}`
 4. docker compose run --rm app air init
 
 ## General commands
