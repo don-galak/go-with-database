@@ -31,4 +31,8 @@ Run build: `docker run -e API_SERVER_ADDR=:3000 go-with-database`
 
 ## References
 
-link: [Develop a Go app with Docker Compose](https://firehydrant.com/blog/develop-a-go-app-with-docker-compose/)
+[Develop a Go app with Docker Compose](https://firehydrant.com/blog/develop-a-go-app-with-docker-compose/)
+
+[Neo4j Installation using “docker-compose”](https://medium.com/@faaizhussain/neo4j-4-0-docker-compose-9bead6634c8)
+
+[Build applications with Neo4j and Go](https://neo4j.com/docs/go-manual/current/)
