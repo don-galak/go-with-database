@@ -13,8 +13,9 @@ import (
 )
 
 const (
-	apiServerAddrFlagName       string = "addr"
-	apiServerStorageDatabaseURL string = "database-url"
+	apiServerAddrFlagName string = "addr"
+	apiServerPostgresUrl  string = "postgres-url"
+	apiServerNeo4jUrl     string = "neo4j-url"
 )
 
 func main() {
@@ -39,7 +40,7 @@ func apiServerCmd() *cli.Command {
 		Usage: "starts the API server",
 		Flags: []cli.Flag{
 			&cli.StringFlag{Name: apiServerAddrFlagName, EnvVars: []string{"API_SERVER_ADDR"}},
-			&cli.StringFlag{Name: apiServerStorageDatabaseURL, EnvVars: []string{"POSTGRES_DB_URL"}},
+			&cli.StringFlag{Name: apiServerPostgresUrl, EnvVars: []string{"POSTGRES_DB_URL"}},
 		},
 		Action: func(c *cli.Context) error {
 
@@ -52,7 +53,7 @@ func apiServerCmd() *cli.Command {
 				close(stopper)
 			}()
 
-			databaseURL := c.String(apiServerStorageDatabaseURL)
+			databaseURL := c.String(apiServerPostgresUrl)
 			s, err := storage.NewStorage(databaseURL)
 			if err != nil {
 				return fmt.Errorf("could not initialize storage: %w", err)
